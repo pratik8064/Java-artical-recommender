@@ -1,7 +1,7 @@
 # Java-artical-recommender
 Web app to recommend java tutorial articles based on data collected from oracle and java programming wikibooks pages for given input. Data is stored and indexed in ElasticSearch
 
-Collection of Data: Used Beautiful soup in python to crawl data and recursively collect all the links and content from the main page from both java wikibooks and oracle javaTM tutorials. data.json file has all data collected.
+Collection of Data: Used Beautiful soup in python to crawl data and recursively collect all the links and content from the main page from java wikibooks. data.json file has all data collected.
 
 Content indexing: I have used elastic search to index data which internally uses Apache Lucene.
 
