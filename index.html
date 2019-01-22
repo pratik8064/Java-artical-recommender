@@ -1,0 +1,408 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="h3 row">
+                <p>Summery</p>
+            </div>
+            <div>
+                <p>ASURITE : psuryawa</p>
+                <p>ASU ID  : 1213231238</p>
+            </div>
+            <div class="row">
+                <p class = "row"> <b>Collection of Data</b> Used Beautiful soup in python to crawl data and recursively collect all the links and content from the main page from both java wikibooks and oracle javaTM tutorials. data.json file has all data collected </p>
+                <p class = "row"> <b>Content indexing</b>  I have used elastic search to index data which internally uses Apache Lucene.
+                    Data is indexed based on content and titles collected using bulk method in ES. While performing search, the query data has been processed to remove stopworkds and stemming using python nltk lib. 
+                    Those tokens are later used for string matching. Query data along with tokens is in questions.js. Mapping used to store index is present in esLib.js which has all CRUD functions used to bulk add data and perform search </p>
+                <p class = "row"> <b>Web App</b> I have created web app to get requests from UI and perform necessary actions on elastic search.  When page loads jquery sends request to add and index data, once that is done it will call 
+                    searchAllDocs method to get all recommendations and dynamically load them on UI.
+                </p>
+                <p class = "row"> <b>Originality</b>
+                        I have used node js based express app to handle backnd. It uses 'elasticsearch' module as client to actual running instance.
+                        I have also used bootstrap and materialize for UI.
+                        I have indexed data in Elasticsearch using similarity algorithm BM25, I have also applied the english analyzer in index mapping while building of indices.
+                        In information retrieval, Okapi BM25 (BM stands for Best Matching) is a ranking function used by search engines to rank matching documents according to their relevance to a given search query.
+                </p>
+                <p class = "row"> 
+                    <b>Steps to run :</b>
+                    <ul>
+                        <li>Make sure Elastic search is running with default port 9200</li>
+                            <li>
+                                use npm install to set project
+                            </li>
+                            <li>
+                                start local node server by command 'node server.js' which will start server on localhost:3000
+                            </li>
+                            <li>
+                                when page is loaded after few seconds recommendations will be shown per query. Click on query button to show and hide accordian 
+                            </li>
+                    </ul>
+                    
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Query 1
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer</p>
+                        <p>Text : One way to implement deep copy is to add copy constructors to each associated class.
+                            A copy constructor takes an instance of 'this' as its single argument and copies all the
+                            values from it. Quite some work, but pretty straightforward and safe. EDIT: note that you
+                            don't need to use accessor methods to read fields. You can access all fields directly
+                            because the source instance is always of the same type as the instance with the copy
+                            constructor. Obvious but might be overlooked. Example: Edit: Note that when using copy
+                            constructors you need to know the runtime type of the object you are copying. With the
+                            above approach you cannot easily copy a mixed list (you might be able to do it with some
+                            reflection code). </p>
+
+                        <div id="result1">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            Query 2
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : question
+                        </p>
+                        <p>Text : I was presented with this question in an end of module open book exam today and found
+                            myself lost. i was reading Head first Javaand both definitions seemed to be exactly the
+                            same. i was just wondering what the MAIN difference was for my own piece of mind. i know
+                            there are a number of similar questions to this but, none i have seen which provide a
+                            definitive answer.Thanks, Darren</p>
+
+                        <div id="result2">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                            Query 3
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer accepted-answer
+                        </p>
+                        <p>Text : Inheritance is when a 'class' derives from an existing 'class'.So if you have a
+                            Person class, then you have a Student class that extends Person, Student inherits all the
+                            things that Person has.There are some details around the access modifiers you put on the
+                            fields/methods in Person, but that's the basic idea.For example, if you have a private
+                            field on Person, Student won't see it because its private, and private fields are not
+                            visible to subclasses.Polymorphism deals with how the program decides which methods it
+                            should use, depending on what type of thing it has.If you have a Person, which has a read
+                            method, and you have a Student which extends Person, which has its own implementation of
+                            read, which method gets called is determined for you by the runtime, depending if you have
+                            a Person or a Student.It gets a bit tricky, but if you do something likePerson p = new
+                            Student();p.read();the read method on Student gets called.Thats the polymorphism in
+                            action.You can do that assignment because a Student is a Person, but the runtime is smart
+                            enough to know that the actual type of p is Student.Note that details differ among
+                            languages.You can do inheritance in javascript for example, but its completely different
+                            than the way it works in Java.</p>
+                        <div id="result3">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+                            aria-expanded="false" aria-controls="collapseFour">
+                            Query 4
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer
+                        </p>
+                        <p>Text : Polymorphism: The ability to treat objects of different types in a similar
+                            manner.Example: Giraffe and Crocodile are both Animals, and animals can Move.If you have an
+                            instance of an Animal then you can call Move without knowing or caring what type of animal
+                            it is.Inheritance: This is one way of achieving both Polymorphism and code reuse at the
+                            same time.Other forms of polymorphism:There are other way of achieving polymorphism, such
+                            as interfaces, which provide only polymorphism but no code reuse (sometimes the code is
+                            quite different, such as Move for a Snake would be quite different from Move for a Dog, in
+                            which case an Interface would be the better polymorphic choice in this case.In other
+                            dynamic languages polymorphism can be achieved with Duck Typing, which is the classes don't
+                            even need to share the same base class or interface, they just need a method with the same
+                            name.Or even more dynamic like Javascript, you don't even need classes at all, just an
+                            object with the same method name can be used polymorphically.</p>
+                        <div id="result4">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+                            aria-expanded="false" aria-controls="collapseFive">
+                            Query 5
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : question
+                        </p>
+                        <p>Text : I found out that the above piece of code is perfectly legal in Java. I have the
+                            following questions. ThanksAdded one more question regarding Abstract method classes.
+                        </p>
+                        <div id="result5">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
+                            aria-expanded="false" aria-controls="collapseSix">
+                            Query 6
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : question
+                        </p>
+                        <p>Text : In java it's a bit difficult to implement a deep object copy function. What steps you
+                            take to ensure the original object and the cloned one share no reference?
+                        </p>
+                        <div id="result6">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven"
+                            aria-expanded="false" aria-controls="collapseSeven">
+                            Query 7
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer</p>
+                        <p>Text : You can make a deep copy serialization without creating some files. Copy: Restore:
+                        </p>
+                        <div id="result7">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight"
+                            aria-expanded="false" aria-controls="collapseEight">
+                            Query 8
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer</p>
+                        <p>Text : Java has the ability to create classes at runtime. These classes are known as
+                            Synthetic Classes or Dynamic Proxies. See for more information. Other open-source
+                            libraries, such as and also allow you to generate synthetic classes, and are more powerful
+                            than the libraries provided with the JRE. Synthetic classes are used by AOP (Aspect
+                            Oriented Programming) libraries such as Spring AOP and AspectJ, as well as ORM libraries
+                            such as Hibernate.
+                        </p>
+                        <div id="result8">
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingNine">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine"
+                            aria-expanded="false" aria-controls="collapseNine">
+                            Query 9
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer</p>
+                        <p>Text : In short: the web server issues a unique identifier to on his visit. The visitor must
+                            bring back that ID for him to be recognised next time around. This identifier also allows
+                            the server to properly segregate objects owned by one session against that of another. If
+                            is: If is: Once he's on the service mode and on the groove, the servlet will work on the
+                            requests from all other clients.Why isn't it a good idea to have one instance per client?
+                            Think about this: Will you hire one pizza guy for every order that came? Do that and you'd
+                            be out of business in no time. It comes with a small risk though. Remember: this single guy
+                            holds all the order information in his pocket: so if you're not cautious about, he may end
+                            up giving the wrong order to a certain client.
+                        </p>
+                        <div id="result9">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTen">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen"
+                            aria-expanded="false" aria-controls="collapseTen">
+                            Query 10
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Type : answer</p>
+                        <p>Text : A safe way is to serialize the object, then deserialize.This ensures everything is a
+                            brand new reference.about how to do this efficiently. Caveats: It's possible for classes to
+                            override serialization such that new instances are created, e.g. for singletons.Also this
+                            of course doesn't work if your classes aren't Serializable.
+                        </p>
+                        <div id="result10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+<script>
+
+    $(document).ready(function () {
+        console.log("GOT MY DOC READY");
+        let promise = $.ajax({
+            type: "POST",
+            url: "/addAllDocuments",
+            dataType: "json",
+            success: function (data) {
+                console.log("______________ Its DONE __________________");
+                console.log(data);
+                let t = setTimeout(searchAllDocs, 1000);
+            }
+        });
+
+
+        function addData(newData) {
+            console.log(newData);
+            for (var i = 0; i < 10; i++) {
+
+                let ul = $("<ul>", { id: "innerul_" + [i] , class: 'row'});
+                $("#result" + [i+1]).append(ul);
+
+                for (var k = 0; k < newData[i].hits.hits.length; k++) {
+
+                    let li = $("<li>", { id: "li_" + [i] + [k], class:'row' });
+                    $("#innerul_" + [i]).append(li);
+
+
+                    let $name = $("<div>", { id: "name_" + [i] + [k], class: 'row'});
+                    $("#li_" + [i] + [k]).append($name);
+                    $("#name_" + [i] + [k]).text("Recommendation " + [k+1]);
+
+
+                    let $title = $("<div>", { id: "title_" + [i] + [k], class: 'row'});
+                    $("#li_" + [i] + [k]).append($title);
+                    $("#title_" + [i] + [k]).text("Title:  " + newData[i].hits.hits[k]._source.title);
+
+                    let $content = $("<div>", { id: "content_" + [i] + [k] });
+                    $("#li_" + [i] + [k]).append($content);
+                    $("#content_" + [i] + [k]).text("Content:  " + newData[i].hits.hits[k]._source.text);
+
+                    let $url = $("<a>", { id: "url_" + [i] + [k] }).attr('href', newData[i].hits.hits[k]._source.url);
+                    $("#li_" + [i] + [k]).append($url);
+                    $("#url_" + [i] + [k]).text("Link:  " + newData[i].hits.hits[k]._source.url);
+                    
+
+                    $("#li_" + [i] + [k]).append("<br />");
+                }
+            }
+
+        };
+
+        function searchAllDocs() {
+            $.ajax({
+                type: "POST",
+                url: "/search",
+                dataType: "json",
+                success: function (data) {
+
+
+                    console.log("________Search is done _________");
+
+                    addData(data);
+                }
+            });
+        }
+
+    });
+
+</script>
+
+</html>
